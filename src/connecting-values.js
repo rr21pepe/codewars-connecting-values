@@ -1,3 +1,6 @@
+const stringify = val => JSON.stringify(val)
+const parse = val => JSON.parse(val)
+
 const getHorizontalMatches = (arr, val, coord) => {
   const matches = []
   const [row] = coord
@@ -75,10 +78,10 @@ const connectedValues = (arr, val, coord) => {
   const diagonalLeftMatches = getLeftDiagonalMatches(arr, val, leftDiagonalStartPoint)
   const diagonalRightMatches = getRightDiagonalMatches(arr, val, rightDiagonalStartPoint)
 
-  const stringifiedHorizontalMatches = horizontalMatches.map(coord => JSON.stringify(coord))
-  const stringifiedVerticalMatches = verticalMatches.map(coord => JSON.stringify(coord))
-  const stringifiedDiagonalLeftMatches = diagonalLeftMatches.map(coord => JSON.stringify(coord))
-  const stringiedDiagonalRightMatches = diagonalRightMatches.map(coord => JSON.stringify(coord))
+  const stringifiedHorizontalMatches = horizontalMatches.map(stringify)
+  const stringifiedVerticalMatches = verticalMatches.map(stringify)
+  const stringifiedDiagonalLeftMatches = diagonalLeftMatches.map(stringify)
+  const stringiedDiagonalRightMatches = diagonalRightMatches.map(stringify)
 
   const matchesWithoutRepeat = [
     ...new Set([
@@ -89,7 +92,7 @@ const connectedValues = (arr, val, coord) => {
     ])
   ]
 
-  const parsedMatchesWithoutRepeat = matchesWithoutRepeat.map(coord => JSON.parse(coord))
+  const parsedMatchesWithoutRepeat = matchesWithoutRepeat.map(parse)
 
   return parsedMatchesWithoutRepeat
 }
