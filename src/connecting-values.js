@@ -13,7 +13,6 @@ const getHorizontalMatches = (arr, val, coord) => {
 const getVerticalMatches = (arr, val, coord) => {
   const matches = []
   const [row, column] = coord
-  const columnToCheck = []
 
   for(let i = 0; i < arr.length; i++) {
     if (arr[i][column] === val) matches.push([i, column])
@@ -22,27 +21,17 @@ const getVerticalMatches = (arr, val, coord) => {
   return matches
 }
 
-const getLeftDiagonalStartPoint = (coord) => {
-  let [row, column] = coord
+const getLeftDiagonalStartPoint = ([row, column]) =>
+  row > column
+    ? [row - column, 0]
+    : [0, column - row]
 
-  while(row !== 0 && column !== 0) {
-    row = row - 1
-    column = column - 1
-  }
+const getRightDiagonalStartPoint = (arr, [row, column]) => {
+  const rowLength = arr[0].length - 1
 
-  return [row, column]
-}
-
-const getRightDiagonalStartPoint = (arr, coord) => {
-  const rowLength = arr[0].length
-  let [row, column] = coord
-
-  while(row !== 0 && column !== rowLength - 1) {
-    row = row - 1
-    column = column + 1
-  }
-
-  return [row, column]
+  return row >= column
+    ? [0, column + row]
+    : [row - (rowLength - column), column + (rowLength - column)]
 }
 
 const getLeftDiagonalMatches = (arr, val, diagonalStartPoint) => {
