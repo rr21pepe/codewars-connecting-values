@@ -1,11 +1,10 @@
 const getHorizontalMatches = (arr, val, coord) => {
   const matches = []
   const [row] = coord
-  const rowToCheck = arr[row]
 
-  for(let i = 0; i < rowToCheck.length; i++) {
-    if (arr[row][i] === val) matches.push([row, i])
-  }
+  arr[row].forEach((cell, idx) => {
+    if (cell === val) matches.push([row, idx])
+  })
 
   return matches
 }
@@ -14,9 +13,9 @@ const getVerticalMatches = (arr, val, coord) => {
   const matches = []
   const [row, column] = coord
 
-  for(let i = 0; i < arr.length; i++) {
-    if (arr[i][column] === val) matches.push([i, column])
-  }
+  arr.forEach((cell, idx) => {
+    if (cell[column] === val) matches.push([idx, column])
+  })
 
   return matches
 }
